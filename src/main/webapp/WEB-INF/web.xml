@@ -7,7 +7,7 @@
 
 	<servlet-mapping>
 		<servlet-name>dispatcherServlet</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
@@ -19,13 +19,20 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	<listener>
+	   <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-            /WEB-INF/spring-servlet.xml
+            /WEB-INF/applicationContext.xml
         </param-value>
 	</context-param>
 
+	<welcome-file-list>
+	    <welcome-file>index.html</welcome-file>
+	</welcome-file-list>
 
 </web-app>

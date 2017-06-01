@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Entity;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,20 +19,29 @@ public class MedicoDAO {
 	private EntityManager em;
 	
 	public Medico findtMedicoById ( Integer id){
-		return Facede.getMedicos().get(id);
+		return  em.find(Medico.class, id);
 	}
 	public List<Medico> findAll (){
-		return Facede.getMedicos();
+		return em.createNamedQuery(Medico.FIND_ALL_MEDICOS, Medico.class).getResultList();
 	}
 	public void save ( Medico medico){
-		///
+		em.persist(medico);
 	}
 	public void remove ( Medico medico){
-		///
+		em.remove(medico);
 	}
 	
 	public void update ( Medico medico){
-		///
+		em.merge(medico);
+	}
+	
+	public void saveOrUpdate ( Medico medico){
+		/** codigo vazio */
+		if(  0 == medico.getCodigo() ){
+			save(medico);//novo
+			return;
+		 }
+		 update(medico);//atualizar
 	}
 
 }

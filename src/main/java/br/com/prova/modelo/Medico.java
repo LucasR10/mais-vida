@@ -6,15 +6,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 		/**
 		 * @author Lucas Rocha
 		 * @since 31/05/2017
 		 * */
 @Entity
+@NamedQueries( @NamedQuery(name=Medico.FIND_ALL_MEDICOS , query="SELECT medico FROM Medico medico"))
 public class Medico implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+     /** NamedQuery */
+	public final static String  FIND_ALL_MEDICOS = "medico.findAllMedicos";
+	
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private int codigo ;

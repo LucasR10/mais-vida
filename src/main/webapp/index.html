@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt_BR" ng-app="alurapic">
+<html lang="pt_BR" ng-app="appModulo">
 
 <head>
 
@@ -20,10 +20,10 @@
      
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/heroic-features.css" rel="stylesheet">
-
+    
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -47,14 +47,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">HOME</a>
+                <a class="navbar-brand" href="index.html">HOME</a>
             </div>
             
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">Cadastra</a>
+                        <a href="cadastro.html">Cadastra</a>
                     </li>
                    
                 </ul>
@@ -66,15 +66,7 @@
 
     <!-- Page Content -->
     <div class="container">
-
-       <!-- Jumbotron Header -->
-        <!-- <header class="jumbotron hero-spacer">
-            <h1>A Warm Welcome!</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
-            <p><a class="btn btn-primary btn-large">Call to action!</a>
-            </p>
-        </header> -->
-
+         
         <hr>
 
         <!-- Title -->
@@ -100,16 +92,27 @@
 							<th>Email</th>
 							<th>Ativo</th>
 							<th>Ocupado</th>
+							<th>Visualizar</th>
+							<th>Editar</th>
+							<th>Excluir</th>
 						</tr>
 					</thead>
 					<tbody ng-init="listarMedicos()">
-						<tr ng-repeat="medico in medicos" >
-						    <td>1</td>
+						<tr ng-repeat="medico in medicos" class="text-center" >
+						    <td>{{$index +1}}</td>
 							<td>{{medico.primeiroNome}}</td>
 							<td>{{medico.ultimoNome}}</td>
 							<td>{{medico.email}}</td>
-							<td><label><input type="radio" value="{{medico.ativo}}" name="optradio"/></label></td>
-							<td><label><input type="checkbox" ng-model="medico.ocupado" name="optradio"/></label></td>
+							
+							<td><input  type="radio" ng-model="medico.ativo" data-ng-value="true" name="stivo_{{$index}}" /> </td>
+							
+							<td><input  type="checkbox" ng-model="medico.ocupado" name="ocupado"/></td>
+							
+							<td><button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-new-window"></span> </button>
+							
+							<td><button  type="button" title="Editar" class="btn btn-primary" > <span class="glyphicon glyphicon-pencil" ></span>  </button></td>
+						    
+						    <td><button  type="button" title="Excluir" class="btn btn-danger" >  <span class="glyphicon glyphicon-trash" ></span>  </button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -127,13 +130,42 @@
             <div class="row">
                 <div class="col-lg-12">
                     <p>Copyright &copy; Your Website 2014</p>
+                    <div ng-include="c.htm"></div>
                 </div>
             </div>
         </footer>
 
-    </div>
-    <!-- /.container -->
 
+    <!-- /.container -->
+   <!-- modal ------------------ -->
+
+	<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+		
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Visualizar Medico</h4>
+				</div>
+			
+				<div class="modal-body">
+					<div>					 
+                      <p>Visualização de médico</p>
+					</div>
+				</div>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+				</div>
+				
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+          </div><!-- /.modal -->
 
 </body>
 

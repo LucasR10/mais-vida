@@ -1,4 +1,4 @@
-angular.module('alurapic',[]);
+angular.module('appModulo',[]);
 
 
 

@@ -18,7 +18,7 @@ public class MedicoController {
 	@ResponseBody
 	public Medico buscar(){
 		  System.out.println(" Buscando  !!");
-		return new MedicoDAO().findById(1);
+		return new MedicoDAO().findtMedicoById(1);
 	}
 	
 	@RequestMapping(value="/listar",method=RequestMethod.GET , produces = "application/json" )

@@ -3,14 +3,23 @@ package br.com.prova.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Entity;
+
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prova.modelo.Medico;
 
 @Repository
+@Transactional
 public class MedicoDAO {
 	
-	public Medico findById ( int id){
+	@PersistenceContext
+	private EntityManager em;
+	
+	public Medico findtMedicoById ( Integer id){
 		return Facede.getMedicos().get(id);
 	}
 	public List<Medico> findAll (){
@@ -28,7 +37,7 @@ public class MedicoDAO {
 	}
 
 }
-
+ 
 class Facede{
 	
 	private static List<Medico> medicos = new ArrayList<>();

@@ -1,0 +1,24 @@
+
+body {
+    padding-top: 70px; 
+}
+
+.hero-spacer {
+    margin-top: 50px;
+}
+
+.hero-feature {
+    margin-bottom: 30px;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+.label-titulo{
+	style="color:#c2c6ce !important;
+}
+.label-valor{
+	font-size:16px !important;
+}
+

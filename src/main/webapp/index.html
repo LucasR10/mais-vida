@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>Prova:: Mais Vida</title>
-     
+
      <!-- lib angular -->
      <script type="text/javascript" src="js/lib/angular.min.js"></script>
      <script type="text/javascript" src="js/lib/main.js"></script>
@@ -20,6 +20,7 @@
      
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/customizado.css" rel="stylesheet">
     
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -47,17 +48,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">HOME</a>
+                <a class="navbar-brand" href="index.html">Home</a>
             </div>
             
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="cadastro.html">Cadastra</a>
-                    </li>
-                   
-                </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -66,8 +61,95 @@
 
     <!-- Page Content -->
     <div class="container">
-         
-        <hr>
+
+ <!-- Title -->
+        <div class="row">
+            <div class="col-lg-12">
+               <div class="page-header">
+  					<h3>Cadastro de Médicos </h3>
+				</div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+         <div class="row">
+
+               <form id="form1" >
+				<div class="form-group  col-md-4">
+					<label for="email">Primeiro Nome:</label> 
+					<input type="text" placeholder="Primeiro Nome" class=" form-control" id="primeiroNome" ng-model="medico.primeiroNome" value="{{medico.primeiroNome}}"  />
+				</div>
+				
+				<div class="form-group col-md-4">
+					<label for="pwd">Segundo Nome</label> 
+					<input type="text" placeholder="Segundo Nome" class="form-control" id="segundonome" ng-model="medico.ultimoNome" value="{{medico.ultimoNome}}" />
+				</div>
+				
+				<div class="form-group col-md-4">
+					
+					<label for="especialidade">Especialidade</label> 
+					
+					<select  class="form-control" id="especialidade" ng-model="medico.especialidade" >
+					
+					<option disabled="disabled" value="">Especialidade</option>
+						<option  value="Cardiologista">Cardiologia</option>
+						<option  value="Geriatria">Geriatria</option>
+						<option  value="Dermatologia">Dermatologia</option>
+					</select>
+					
+				</div>
+				
+				<div class="form-group col-md-4">
+					<label for="email">Email</label> 
+					<input type="email" placeholder="Email" ng-model="medico.email" value="{{medico.email}}" class="form-control" id="email" />
+				</div>
+				
+				<div class="form-group col-md-4">
+					<label for="pwd">Ativo</label> 
+					<div class="form-group">
+					<label class="checkbox-inline"><input type="checkbox" value="{{medico.ativo}}" ng-model="medico.ativo">Sim</label>
+					</div>
+				</div>
+				
+				<div class="form-group col-md-4">
+					
+					<label for="pwd">Status</label> 
+					
+					<div class="form-group">
+					<input type="radio"  ng-value="true" ng-model="medico.ocupado" name="status" /> Ocupado 
+					<input type="radio"  ng-value="false"  ng-model="medico.ocupado"  name="status" /> Disponivel 
+					</div>
+				</div>
+				
+				<div class="form-group col-md-2">
+					
+					<label for="estado">Estado</label> 
+					
+					<select class="form-control" id="estado" ng-model="medico.estado">
+						<option disabled="disabled" value="">Estado</option>
+						<option value="DF" >DF</option>
+						<option value="Goiás" >Goiás</option>
+					</select>
+				</div>
+				<div class="form-group col-md-2">
+					
+					<label for="especialidade">Cidade</label> 
+					
+					<select class="form-control" id="especialidade" ng-model="medico.cidade">
+					    <option disabled="disabled" value="">Cidade</option>
+						<option value="Brásilia">Brásilia</option>
+						<option value="Goiânia">Goiânia</option>
+					</select>
+				</div>
+				
+				<div class="col-md-12 ">
+					<button ng-click="salvarMedico( medico )" type="button" class="btn btn-primary " style="margin-right:15">Salvar Médico</button>
+					<button ng-click="cencelar()" type="button" class="btn btn-default " style="margin-right:15">Cancelar</button>
+				</div>
+
+			</form>
+        </div>
+         <hr size="3">
 
         <!-- Title -->
         <div class="row">
@@ -98,21 +180,21 @@
 						</tr>
 					</thead>
 					<tbody ng-init="listarMedicos()">
-						<tr ng-repeat="medico in medicos" class="text-center" >
-						    <td>{{$index +1}}</td>
+						<tr ng-repeat="medico in medicos" class="text-center" ng-click="editarMedico(medico)" >
+						    <td class="">{{$index +1}}</td>
 							<td>{{medico.primeiroNome}}</td>
 							<td>{{medico.ultimoNome}}</td>
 							<td>{{medico.email}}</td>
 							
-							<td><input  type="radio" ng-model="medico.ativo" data-ng-value="true" name="stivo_{{$index}}" /> </td>
+							<td ><input  style="pointer-events: none;" type="radio" ng-model="medico.ativo" data-ng-value="true" name="stivo_{{$index}}" /> </td>
 							
-							<td><input  type="checkbox" ng-model="medico.ocupado" name="ocupado"/></td>
+							<td><input style="pointer-events: none;"  type="checkbox" ng-model="medico.ocupado" name="ocupado"/></td>
 							
-							<td><button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-new-window"></span> </button>
+							<td><button ng-click="visualizar(medico )" type="button" class="btn btn-primary " data-toggle="modal" data-target="#visualizar"><span class="glyphicon glyphicon-new-window"></span> </button>
 							
-							<td><button  type="button" title="Editar" class="btn btn-primary" > <span class="glyphicon glyphicon-pencil" ></span>  </button></td>
+							<td><button ng-click="editarMedico(medico)" type="button" title="Editar" class="btn btn-primary" > <span class="glyphicon glyphicon-pencil" ></span>  </button></td>
 						    
-						    <td><button  type="button" title="Excluir" class="btn btn-danger" >  <span class="glyphicon glyphicon-trash" ></span>  </button></td>
+						    <td><button ng-click="excluirMedico( medico )" type="button" title="Excluir" class="btn btn-danger" >  <span class="glyphicon glyphicon-trash" ></span>  </button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -128,8 +210,8 @@
         <!-- Footer -->
         <footer>
             <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                <div class="col-lg-12 h">
+                    <p>Copyright &copy; prova 2017</p>
                     <div ng-include="c.htm"></div>
                 </div>
             </div>
@@ -139,7 +221,7 @@
     <!-- /.container -->
    <!-- modal ------------------ -->
 
-	<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+	<div class="modal fade" tabindex="-1" role="dialog" id="visualizar">
 		
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -152,9 +234,56 @@
 				</div>
 			
 				<div class="modal-body">
-					<div>					 
-                      <p>Visualização de médico</p>
+					
+					         <div class="row">
+
+               <form id="form1" >
+				<div class="form-group  col-md-4">
+					<label for="email">Primeiro Nome:</label> 
+					<div>{{medico.primeiroNome}}</div>
+				</div>
+				
+				<div class="form-group col-md-4">
+					<label for="pwd">Segundo Nome</label> 
+					<div>{{medico.ultimoNome}}</div>
+				</div>
+				
+				<div class="form-group col-md-4">
+					<label for="especialidade">Especialidade</label>
+					 <div class="form-control" style="border: 0px;">{{medico.especialidade}} </div>
+				</div>
+				
+				<div class="form-group col-md-4">
+					<label for="email">Email</label> 
+					<div>{{medico.email}} </div>
+				</div>
+				
+				<div class="form-group col-md-4">
+					<label for="pwd">Ativo</label> 
+					<div class="form-group">
+					{{medico.ativo ? 'Sim':'Não'}}
 					</div>
+				</div>
+				
+				<div class="form-group col-md-4">
+					
+					<label for="pwd">Status</label> 
+					<div class="form-group">
+					 {{medico.ocupado ? 'Ocupado ':'Disponivel'}}
+					</div>
+				</div>
+				
+				<div class="form-group col-md-2">
+					<label for="estado">Estado</label> 
+					<div>{{medico.estado}}</div>
+				</div>
+				<div class="form-group col-md-2">
+					<label for="especialidade">Cidade</label> 
+					<div> {{medico.cidade}}</div>
+					
+				</div>
+					
+					
 				</div>
 				
 				<div class="modal-footer">

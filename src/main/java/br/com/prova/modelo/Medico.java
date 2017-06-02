@@ -11,7 +11,7 @@ import javax.persistence.NamedQuery;
 
 		/**
 		 * @author Lucas Rocha
-		 * @since 31/05/2017
+		 * 
 		 * */
 @Entity
 @NamedQueries( @NamedQuery(name=Medico.FIND_ALL_MEDICOS , query="SELECT medico FROM Medico medico"))
@@ -27,6 +27,9 @@ public class Medico implements Serializable {
 	private String primeiroNome;
 	private String ultimoNome;
 	private String email;
+	private String estado ;
+	private String cidade;
+	private String especialidade;
 	private boolean  ativo;
 	private boolean ocupado;
 	
@@ -77,9 +80,35 @@ public class Medico implements Serializable {
 	public void setOcupado(boolean ocupado) {
 		this.ocupado = ocupado;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+
+	public String getEstado() {
+		return estado;
 	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+
+	public String getEspecialidade() {
+		return especialidade;
+	}
+
+	public void setEspecialidade(String especialidade) {
+		this.especialidade = especialidade;
+	}
+
 	
 	
 }

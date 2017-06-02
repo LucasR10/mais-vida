@@ -1,6 +1,5 @@
 package br.com.prova.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,6 +9,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prova.modelo.Medico;
+
+/**
+ * @author Lucas Rocha
+ * 
+ * */
 
 @Repository
 @Transactional
@@ -28,7 +32,7 @@ public class MedicoDAO {
 		em.persist(medico);
 	}
 	public void remove ( Medico medico){
-		em.remove(medico);
+		em.remove( em.merge(medico) );
 	}
 	
 	public void update ( Medico medico){
@@ -37,7 +41,7 @@ public class MedicoDAO {
 	
 	public void saveOrUpdate ( Medico medico){
 		/** codigo vazio */
-		if(  0 == medico.getCodigo() ){
+		if( medico.getCodigo() == 0 ){
 			save(medico);//novo
 			return;
 		 }
@@ -46,17 +50,5 @@ public class MedicoDAO {
 
 }
  
-class Facede{
 	
-	private static List<Medico> medicos = new ArrayList<>();
-	
-	static{
-		medicos.add(new Medico("John", "Boo", "jonh@gmail.com", false, false));
-		medicos.add(new Medico("Mary", "Brown", "mary@gmail.com", false, true));
-		medicos.add(new Medico("James", "Moary", "james@gmail.com", true, false));
-	}
-	
-	public static List<Medico> getMedicos() {
-		return medicos;
-	}
-}
+		

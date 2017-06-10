@@ -7,26 +7,26 @@
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css" media="screen,projection" />
 
-    <link  href="css/materialize/customizado.css" rel="stylesheet">
+    <link href="css/materialize/customizado.css" rel="stylesheet">
 
     <script src="js/lib/angular.min.js"></script>
     <script src="js/lib/main.js"></script>
     <script src="js/lib/angular-route.min.js"></script>
-    <script src="js/controllers/indexController.js"></script>
+    <script src="js/controllers/processoController.js"></script>
     <script src="js/controllers/usuarioController.js"></script>
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8" />
 
-    <title>CPJ - Controle de processos Jurídicos</title>
+    <title>CPJ - Processos</title>
 </head>
 
-<body ng-controller="indexController">
+<body ng-controller="processoController"> 
 
-         <div ng-include="index2.html"></div>
+    <div ng-include="index2.html"></div>
     <ul id="slide-out" class="side-nav collapsible" data-collapsible="expandable">
         <li>
-            <div class="userView" ng-controller="usuarioController">
+            <div class="userView" >
                 <div class="background">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4gL_Mm4R0ErellQV8FsMKtTUPccUg4Rjfk6jATv1ChDWJYq2g">
                 </div>
@@ -35,10 +35,10 @@
                 <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
             </div>
         </li>
-        <li><a href="index.html">Home</a></li>
+
         <li><a href="#!">Cadastrar</a></li>
         <li><a href="#!">Configurações</a></li>
-        
+
         <li>
             <div class="divider"></div>
         </li>
@@ -54,6 +54,7 @@
                     <a href="#">
                         <i data-activates="slide-out" class="material-icons button-collapse">menu</i></a>
                 </li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="processo.html">Processos</a></li>
                 <li><a href="#">Relátórios</a></li>
             </ul>
@@ -62,42 +63,48 @@
 
     <br><br>
     <div class="container">
-        <table class="bordered striped responsive-table">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Número</th>
-                    <th>Ínicio</th>
-                    <th>Limite</th>
-                    <th>Concluido</th>
-                    <th>Editar </th>
-                    <th>Excluir </th>
-                </tr>
-            </thead>
+           
+         <!--   <div class="input-field col s6">
+              <i class="material-icons prefix">search</i> 
+              <input id="icon_prefix" type="search" class="validate"> <label for="icon_prefix">Consultar Processo</label>
+           </div>
+           -->
+           <ul class="divider"> </ul> 
+            <div class="row">
 
-            <tbody>
-             
-                <tr ng-repeat="processo in processos">
-                    <td>{{processo.nome}}</td>
-                    <td>{{processo.numero}}</td>
-                    <td>{{processo.dataInc}}</td>
-                    <td>{{processo.dataFim}}</td>
-                    <td><i class="small material-icons left">{{processo.ativo == 'true' ? "done": "query_builder"}}</i></td>
-                    <td>
-                        <a href="processo.html" class="waves-effect  btn " ng-click="excluirMedico(null)">
-                            <i class="small material-icons left">mode_edit</i>
-                        </a>
-                    </td>
-                    <td>
-                        <a ng-click="excluirProcesso( $index )" class="waves-effect btn red">
-                            <i class="small material-icons left">delete</i>
-                        </a>
-                    </td>
-                </tr>
+            <form class="col s12">
+                <div class="row">
 
-            </tbody>
-        </table>
+                    <div class="input-field col s6">
+                        <input id="nome" type="text" ng-model="processo.nome" class="validate"> <label for="nome">Nome</label>
+                    </div>
 
+                    <div class="input-field col s6">
+                        <input id="nummero" type="number" ng-model="processo.numero" class="validate"> <label for="nummero">Número</label>
+                    </div>
+                    <div class="col s6">
+                        <input id="dat-inc" type="date" ng-model="processo.dataInc"> <label for="dat-inc"></label>
+                    </div>
+                    <div class=" col s6">
+                        <input id="dat-fim" type="date" ng-model="processo.dataFim" ><label for="dat-fim"</label>
+                    </div>
+                    <div class="col s6">
+                     
+                   <div class="file-field input-field"> 
+                     <div class="btn">
+                          <span>Arquivo</span> <input type="file" file-model="processo.arquivo">
+                       </div>
+                     <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                     </div>
+                   </div>
+                 
+                    <button ng-click="salvarProcesso(processo);" class="btn waves-effect waves-light" type="submit" name="action"> Salvar </button>
+                    <a href="index.html" class="waves-effect btn red"> Cancelar</a>
+
+                </div>
+            </form>
+        </div>
     </div>
     <!--
     <footer class="page-footer">
@@ -117,6 +124,8 @@
     <script>
         $(document).ready(function() {
             $(".button-collapse").sideNav();
+            Materialize.updateTextFields();
+
         });
     </script>
 </body>

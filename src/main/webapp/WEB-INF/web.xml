@@ -16,13 +16,23 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
+	<filter>
+		<filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	
+
 	<listener>
-	   <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-    </listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -32,7 +42,7 @@
 	</context-param>
 
 	<welcome-file-list>
-	    <welcome-file>index.html</welcome-file>
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
 </web-app>
